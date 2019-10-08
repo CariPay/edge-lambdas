@@ -14,8 +14,8 @@ exports.handler = (event, context, callback) => {
             key: 'Access-Control-Allow-Methods',
             value: "GET, PUT, POST"
         }];
-        headers['access-control-allowe-headers'] = [{
-            key: 'Access-Control-Allowed-Headers',
+        headers['access-control-allow-headers'] = [{
+            key: 'Access-Control-Allow-Headers',
             value: "*"
         }];
         headers['access-control-max-age'] = [{
