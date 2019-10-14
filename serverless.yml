@@ -1,0 +1,34 @@
+service: edge-lambdas
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  memorySize: 128
+  timeout: 5
+  stage: ${ opt:stage }
+  deploymentBucket: kyc-deployments
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource:
+        - Fn::Join:
+          - ""
+          - - "arn:aws:logs:::"
+            - "log-group:"
+            - /aws/lambda/${self:service}-*
+
+functions:
+  queryRedirect:
+    handler: qs-redirect.handler
+    name: ${self:service}-queries-${opt:stage}
+
+  headers:
+    handler: sec-headers.handler
+    name: ${self:service}-headers-${opt:stage}
+
+  subdirIndex:
+    handler: subdir-index.handler
+    name: ${self:service}-indexhtml-${opt:stage}
