@@ -1,24 +1,16 @@
+# See limits on Lambda@Edge http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-lambda-at-edge
+
 service: edge-lambdas
 
 provider:
   name: aws
+  region: us-east-1
+  role: LambdaEdgeRole
   runtime: nodejs10.x
   memorySize: 128
   timeout: 5
   stage: ${ opt:stage }
   deploymentBucket: kyc-deployments
-  region: us-east-1
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - logs:CreateLogStream
-        - logs:PutLogEvents
-      Resource:
-        - Fn::Join:
-          - ""
-          - - "arn:aws:logs:::"
-            - "log-group:"
-            - /aws/lambda/${self:service}-*
 
 functions:
   queryRedirect:
@@ -32,3 +24,36 @@ functions:
   subdirIndex:
     handler: subdir-index.handler
     name: ${self:service}-indexhtml-${opt:stage}
+    
+  corsViewerResponse:
+    handler: src/viewer_response/cors.handler
+    name: ${self:service}-cors-${opt:stage}
+    package:
+      include:
+        - src/**
+
+resources:
+  Resources:
+    LambdaEdgeRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - edgelambda.amazonaws.com
+                - lambda.amazonaws.com
+            Action:
+            - sts:AssumeRole
+        Policies:
+          - PolicyName: LambdaEdgeExecutionRole
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource: "arn:aws:logs:*:*:*"
