@@ -23,5 +23,4 @@ exports.handler = (event, context, callback) => {
 
     // Return to CloudFront
     return callback(null, request);
-
 };

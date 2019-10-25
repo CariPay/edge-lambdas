@@ -1,4 +1,3 @@
-// Register this as the origin-response trigger handler
 'use strict';
 
 exports.handler = (event, context, callback) => {
@@ -28,8 +27,7 @@ exports.handler = (event, context, callback) => {
     }];
     response.headers['Content-Security-Policy'] = [{
         key: 'Content-Security-Policy',
-        value: `default-src 'none'; form-action 'self'; connect-src 'self'; font-src 'self' fonts.gstatic.com; frame-src 'self'; img-src 'self' www.google-analytis.com; script-src 'self' www.google-analytis.com; style-src 'self' fonts.googleapis.com; upgrade-insecure-requests; frame-ancestors 'none';`
-        // @Question: what is base-uri: 'self'; doing?
+        value: `default-src 'none'; base-uri: 'self'; form-action 'self'; connect-src 'self'; font-src 'self' fonts.gstatic.com; frame-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' fonts.googleapis.com; upgrade-insecure-requests; frame-ancestors 'none';`
     }];
 
     response.headers['Feature-Policy'] = [{

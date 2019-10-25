@@ -4,19 +4,33 @@ service: edge-lambdas
 
 provider:
   name: aws
-  runtime: nodejs8.10
   region: us-east-1
-  memorySize: 128
   role: LambdaEdgeRole
-
-package:
-  include:
-    - src/**
+  runtime: nodejs10.x
+  memorySize: 128
+  timeout: 5
+  stage: ${ opt:stage }
+  deploymentBucket: kyc-deployments
 
 functions:
+  queryRedirect:
+    handler: qs-redirect.handler
+    name: ${self:service}-queries-${opt:stage}
+
+  headers:
+    handler: sec-headers.handler
+    name: ${self:service}-headers-${opt:stage}
+
+  subdirIndex:
+    handler: subdir-index.handler
+    name: ${self:service}-indexhtml-${opt:stage}
+    
   corsViewerResponse:
     handler: src/viewer_response/cors.handler
-    timeout: 5
+    name: ${self:service}-cors-${opt:stage}
+    package:
+      include:
+        - src/**
 
 resources:
   Resources:
