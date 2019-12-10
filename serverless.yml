@@ -15,26 +15,26 @@ provider:
 
 functions:
   subdirIndex:
-    handler: origin_request/subdir-index.handler
+    handler: src/origin_request/subdir-index.handler
     name: ${self:service}-indexhtml-${opt:stage}
 
   headers:
-    handler: origin_response/sec-headers.handler
+    handler: src/origin_response/sec-headers.handler
     name: ${self:service}-headers-${opt:stage}
 
   queryRedirect:
-    handler: viewer_request/qs-redirect.handler
+    handler: src/viewer_request/qs-redirect.handler
     name: ${self:service}-queries-${opt:stage}
 
   basicAuth:
-    handler: viewer_request/basic-auth.handler
+    handler: src/viewer_request/basic-auth.handler
     name: ${self:service}-auth-${opt:stage}
     package:
       include:
         - viewer_request/opts.json
 
   corsViewerResponse:
-    handler: viewer_response/cors.handler
+    handler: src/viewer_response/cors.handler
     name: ${self:service}-cors-${opt:stage}
 
 resources:
