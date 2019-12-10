@@ -4,7 +4,6 @@ service: edge-lambdas
 
 provider:
   name: aws
-  profile: cp
   region: us-east-1
   role: LambdaEdgeRole
   runtime: nodejs10.x
