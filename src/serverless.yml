@@ -4,33 +4,38 @@ service: edge-lambdas
 
 provider:
   name: aws
+  profile: cp
   region: us-east-1
   role: LambdaEdgeRole
   runtime: nodejs10.x
   memorySize: 128
   timeout: 5
   stage: ${ opt:stage }
-  deploymentBucket: kyc-deployments
+  deploymentBucket: cp-deployments
 
 functions:
-  queryRedirect:
-    handler: qs-redirect.handler
-    name: ${self:service}-queries-${opt:stage}
+  subdirIndex:
+    handler: origin_request/subdir-index.handler
+    name: ${self:service}-indexhtml-${opt:stage}
 
   headers:
-    handler: sec-headers.handler
+    handler: origin_response/sec-headers.handler
     name: ${self:service}-headers-${opt:stage}
 
-  subdirIndex:
-    handler: subdir-index.handler
-    name: ${self:service}-indexhtml-${opt:stage}
-    
-  corsViewerResponse:
-    handler: src/viewer_response/cors.handler
-    name: ${self:service}-cors-${opt:stage}
+  queryRedirect:
+    handler: viewer_request/qs-redirect.handler
+    name: ${self:service}-queries-${opt:stage}
+
+  basicAuth:
+    handler: viewer_request/basic-auth.handler
+    name: ${self:service}-auth-${opt:stage}
     package:
       include:
-        - src/**
+        - viewer_request/opts.json
+
+  corsViewerResponse:
+    handler: viewer_response/cors.handler
+    name: ${self:service}-cors-${opt:stage}
 
 resources:
   Resources:

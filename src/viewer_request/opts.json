@@ -1,0 +1,8 @@
+{
+  "acl": [
+    {"uname": "investor", "pword": "Qkycraise2020", "route": "investor" },
+    {"uname": "massy", "pword": "MASSYqkyc2020", "route": "msyg" },
+    {"uname": "gaurdian", "pword": "GLOCqkyc2020", "route": "grgc" },
+    {"uname": "socialcore", "pword": "scgqkyc2020", "route": "proposals" }
+  ]
+}
