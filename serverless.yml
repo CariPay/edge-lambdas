@@ -10,7 +10,7 @@ provider:
   memorySize: 128
   timeout: 5
   stage: ${ opt:stage }
-  deploymentBucket: cp-deployments
+  deploymentBucket: kyc-deployments
 
 functions:
   subdirIndex:
