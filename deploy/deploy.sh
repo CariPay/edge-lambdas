@@ -31,7 +31,6 @@ echo "config values"
 cat config.env
 echo "====COMPLETE===="
 
-cd serverless/
 npm install
 
 serverless deploy -s $STAGE
