@@ -1,0 +1,14 @@
+sudo: required
+language: node_js
+node_js:
+- 11
+
+before_script:
+  - npm i -g serverless
+
+script:
+  - deploy/deploy.sh # serverless
+
+env:
+  global:
+    AWS_ACCOUNT_ID: 500307732655
