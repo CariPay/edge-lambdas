@@ -19,7 +19,7 @@ IFS=/; paths=( $TRAVIS_BRANCH )
 COMPANY_INITIALS="${paths[2]:=cp}"
 
 echo "Fetching config for $COMPANY_INITIALS on stage $STAGE"
-aws s3 cp s3://kyc-config/$COMPANY_INITIALS/ocr/env/$STAGE.env ./config.env --region us-east-1
+aws s3 cp s3://kyc-config/$COMPANY_INITIALS/edge-lambdas/env/$STAGE.env ./config.env --region us-east-1
 
 echo "export DEPLOYMENT_STAGE=$STAGE" >> config.env
 echo "export STAGE=$STAGE" >> config.env
