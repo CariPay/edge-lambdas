@@ -28,7 +28,7 @@ exports.handler = (event, context, callback) => {
     }];
     response.headers['Content-Security-Policy'] = [{
         key: 'Content-Security-Policy',
-        value: `default-src 'none'; form-action 'self'; connect-src 'self' 60ke2c4rt8.execute-api.us-east-1.amazonaws.com; font-src 'self' fonts.gstatic.com; frame-src 'self'; img-src 'self' www.google-analytis.com; script-src 'self' www.google-analytis.com; style-src 'self' fonts.googleapis.com; upgrade-insecure-requests; frame-ancestors 'none';`
+        value: `default-src 'none'; form-action 'self'; connect-src 'self' https://*.getqkyc.com; font-src 'self' fonts.gstatic.com; frame-src 'self'; img-src 'self' www.google-analytis.com; script-src 'self' www.google-analytis.com; style-src 'self' fonts.googleapis.com; upgrade-insecure-requests; frame-ancestors 'none';`
         // @Question: what is base-uri: 'self'; doing?
     }];
 
