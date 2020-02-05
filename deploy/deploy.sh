@@ -7,8 +7,8 @@ elif [[ $TRAVIS_BRANCH =~ bug|release ]]; then
   echo 'Deploying to qa: ' $TRAVIS_BRANCH
   STAGE=qa
 elif [[ $TRAVIS_BRANCH =~ master ]]; then
-  echo 'Deploying to qa: ' $TRAVIS_BRANCH
-  STAGE=qa
+  echo 'Deploying to prod: ' $TRAVIS_BRANCH
+  STAGE=prod
 else
   echo 'Deploying to dev, no matching branch found: ' $TRAVIS_BRANCH
   STAGE=dev
