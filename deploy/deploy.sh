@@ -32,7 +32,6 @@ cat config.env
 echo "====COMPLETE===="
 
 cd serverless/
-npm i -g serverless
 npm install
 
 serverless deploy -s $STAGE

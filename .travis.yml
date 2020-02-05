@@ -4,7 +4,7 @@ node_js:
 - 11
 
 before_script:
-  - npm i -g serverless
+  - deploy/setup.sh
 
 script:
   - deploy/deploy.sh # serverless
