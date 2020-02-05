@@ -17,9 +17,10 @@ fi
 # Split the branch path into an array. eg release/0.1.0 or release/0.1.0/chr
 IFS=/; paths=( $TRAVIS_BRANCH )
 COMPANY_INITIALS="${paths[2]:=cp}"
+REGION="${AWS_REGION:=us-east-1}"
 
 echo "Fetching config for $COMPANY_INITIALS on stage $STAGE"
-aws s3 cp s3://kyc-config/$COMPANY_INITIALS/edge-lambdas/env/$STAGE.env ./config.env --region us-east-1
+aws s3 cp s3://kyc-config/$COMPANY_INITIALS/edge-lambdas/env/$STAGE.env ./config.env --region $REGION
 
 echo "export DEPLOYMENT_STAGE=$STAGE" >> config.env
 echo "export STAGE=$STAGE" >> config.env
