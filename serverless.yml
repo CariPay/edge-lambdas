@@ -1,16 +1,16 @@
 # See limits on Lambda@Edge http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-lambda-at-edge
 
-service: edge-lambdas
+service: ${env:SERVICE_NAME}
 
 provider:
   name: aws
-  region: us-east-1
+  region: ${env:REGION}
   role: LambdaEdgeRole
   runtime: nodejs10.x
-  memorySize: 128
-  timeout: 5
+  memorySize: ${env:MEMORY_SIZE}
+  timeout: ${env:TIMEOUT}
   stage: ${ opt:stage }
-  deploymentBucket: kyc-deployments
+  deploymentBucket: ${env:DEPLOYMENT_BUCKET}
 
 functions:
   subdirIndex:
