@@ -2,9 +2,22 @@
 'use strict';
 
 exports.handler = (event, context, callback) => {
-    console.log(event)
+    // console.log(event)
     const response = event.Records[0].cf.response;
     const headers = response.headers;
+
+    const cspHeader = [
+        `default-src 'none';`,
+        `form-action 'self';`,
+        `connect-src 'self' https://*.getqkyc.com https://*.s3.amazonaws.com;`,
+        `font-src 'self' fonts.gstatic.com;`,
+        `frame-src 'self';`,
+        `img-src 'self' www.google-analytics.com;`,
+        `script-src 'self' www.google-analytics.com www.gstatic.com js.hsforms.net forms.hsforms.com www.google.com 'unsafe-inline';`,
+        `style-src 'self' fonts.googleapis.com 'unsafe-inline';`,
+        `upgrade-insecure-requests;`,
+        `frame-ancestors 'none'`
+    ];
 
     response.headers['Strict-Transport-Security'] = [{
         key: 'Strict-Transport-Security',
@@ -28,7 +41,7 @@ exports.handler = (event, context, callback) => {
     }];
     response.headers['Content-Security-Policy'] = [{
         key: 'Content-Security-Policy',
-        value: `default-src 'none'; form-action 'self'; connect-src 'self' https://*.getqkyc.com; font-src 'self' fonts.gstatic.com; frame-src 'self'; img-src 'self' www.google-analytis.com; script-src 'self' www.google-analytis.com; style-src 'self' fonts.googleapis.com; upgrade-insecure-requests; frame-ancestors 'none';`
+        value: cspHeader.join(' ')
         // @Question: what is base-uri: 'self'; doing?
     }];
 
