@@ -12,7 +12,7 @@ exports.handler = (event, context, callback) => {
         `connect-src 'self' https://*.getqkyc.com https://*.s3.amazonaws.com;`,
         `font-src 'self' fonts.gstatic.com;`,
         `frame-src 'self';`,
-        `img-src 'self' www.google-analytics.com;`,
+        `img-src 'self' www.google-analytics.com https://js.hsforms.net/sproket.png;`,
         `script-src 'self' www.google-analytics.com www.gstatic.com js.hsforms.net forms.hsforms.com www.google.com 'unsafe-inline';`,
         `style-src 'self' fonts.googleapis.com 'unsafe-inline';`,
         `upgrade-insecure-requests;`,
