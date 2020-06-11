@@ -14,9 +14,7 @@ else
   STAGE=dev-1
 fi
 
-# Split the branch path into an array. eg release/0.1.0 or release/0.1.0/chr
-IFS=/; paths=( $TRAVIS_BRANCH )
-COMPANY_INITIALS="${paths[2]:=cp}"
+COMPANY_INITIALS=$(deploy/get_company.sh $TRAVIS_BRANCH)
 REGION="${AWS_REGION:=us-east-1}"
 
 echo "Fetching config for $COMPANY_INITIALS on stage $STAGE"
