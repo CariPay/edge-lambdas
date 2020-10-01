@@ -9,7 +9,7 @@ exports.handler = (event, context, callback) => {
     const cspHeader = [
 	`default-src 'none';`,
 	`form-action 'self' https://forms.hsforms.com;`,
-	`connect-src 'self' https://*.getqkyc.com https://*.s3.amazonaws.com;`,
+	`connect-src 'self' https://*.getqkyc.com https://*.s3.amazonaws.com https://www.google-analytics.com;`,
 	`font-src 'self' fonts.gstatic.com;`,
 	`frame-src 'self' https://www.google.com https://app.hubspot.com  https://forms.hsforms.com;`,
 	`img-src 'self' https://www.google-analytics.com https://js.hsforms.net https://forms.hubspot.com;`,
