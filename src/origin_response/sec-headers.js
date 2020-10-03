@@ -7,16 +7,16 @@ exports.handler = (event, context, callback) => {
     const headers = response.headers;
 
     const cspHeader = [
-        `default-src 'none';`,
-        `form-action 'self' https://forms.hsforms.com;`,
-        `connect-src 'self' https://*.getqkyc.com https://*.s3.amazonaws.com;`,
-        `font-src 'self' fonts.gstatic.com;`,
-        `frame-src 'self' https://www.google.com https://app.hubspot.com  https://forms.hsforms.com;`,
-        `img-src 'self' https://www.google-analytics.com https://js.hsforms.net https://forms.hubspot.com;`,
-        `script-src 'self' www.google-analytics.com www.gstatic.com js.hsforms.net forms.hsforms.com www.google.com 'unsafe-inline';`,
-        `style-src 'self' fonts.googleapis.com 'unsafe-inline';`,
-        `upgrade-insecure-requests;`,
-        `frame-ancestors 'none'`
+      `default-src 'none';`,
+      `form-action 'self' https://forms.hsforms.com;`,
+      `connect-src 'self' https://*.getqkyc.com https://*.s3.amazonaws.com https://www.google-analytics.com;`,
+      `font-src 'self' fonts.gstatic.com;`,
+      `frame-src 'self' https://www.google.com https://app.hubspot.com https://forms.hsforms.com;`,
+      `img-src 'self' https://www.google-analytics.com https://js.hsforms.net https://forms.hubspot.com https://px.ads.linkedin.com;`,
+      `script-src 'self' www.google-analytics.com www.gstatic.com js.hsforms.net forms.hsforms.com www.google.com snap.licdn.com 'unsafe-inline';`,
+      `style-src 'self' fonts.googleapis.com 'unsafe-inline';`,
+      `upgrade-insecure-requests;`,
+      `frame-ancestors 'none'`
     ];
 
     response.headers['Strict-Transport-Security'] = [{
