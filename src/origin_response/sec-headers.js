@@ -12,7 +12,7 @@ exports.handler = (event, context, callback) => {
       `connect-src 'self' https://*.getqkyc.com https://*.s3.amazonaws.com https://www.google-analytics.com;`,
       `font-src 'self' fonts.gstatic.com;`,
       `frame-src 'self' https://www.google.com https://app.hubspot.com https://forms.hsforms.com;`,
-      `img-src 'self' https://www.google-analytics.com https://js.hsforms.net https://forms.hubspot.com https://px.ads.linkedin.com;`,
+      `img-src 'self' https://www.google-analytics.com https://js.hsforms.net https://forms.hubspot.com https://px.ads.linkedin.com https://www.linkedin.com;`,
       `script-src 'self' www.google-analytics.com www.gstatic.com js.hsforms.net forms.hsforms.com www.google.com snap.licdn.com 'unsafe-inline';`,
       `style-src 'self' fonts.googleapis.com 'unsafe-inline';`,
       `upgrade-insecure-requests;`,
