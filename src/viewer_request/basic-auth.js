@@ -29,7 +29,7 @@ exports.handler = (event, context, callback) => {
     console.log("az: ", authorization)
 
     if (!authParams.length) {
-        return callback(null, request);
+        callback(null, request);
     }
 
     // Configure authentication
@@ -54,9 +54,9 @@ exports.handler = (event, context, callback) => {
             },
         };
 
-        return callback(null, response);
+        callback(null, response);
     }
 
     // Continue request processing if authentication passed
-    return callback(null, request);
+    callback(null, request);
 };

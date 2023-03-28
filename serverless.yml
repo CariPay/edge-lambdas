@@ -1,16 +1,19 @@
 # See limits on Lambda@Edge http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-lambda-at-edge
-
-service: ${env:SERVICE_NAME}
+service: edge-lambda
 
 provider:
   name: aws
-  region: ${env:REGION}
+  region: us-east-1 # Edge lambdas must exist in us-east-1
   role: LambdaEdgeRole
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   memorySize: 128
-  timeout: 10
+  timeout: 5 # Timeouts for edge lambdas must not exceed 5s
   stage: ${ opt:stage }
-  deploymentBucket: ${env:DEPLOYMENT_BUCKET}
+  deploymentBucket: ${self:custom.deploymentBucket}
+  versionFunctions: true
+
+custom:
+  deploymentBucket: ${ssm:/${opt:client}/${opt:stage}/DEPLOYMENT_BUCKET}
 
 functions:
   subdirIndex:
@@ -32,6 +35,10 @@ functions:
       include:
         - viewer_request/opts.json
 
+  getQkycAuth:
+    handler: src/viewer_request/getqkyc-auth.handler
+    name: ${self:service}-getqkyc-auth-${opt:stage}
+        
   corsViewerResponse:
     handler: src/viewer_response/cors.handler
     name: ${self:service}-cors-${opt:stage}

@@ -38,9 +38,9 @@ exports.handler = (event, context, callback) => {
                 }]
             }
         };
-        return callback(null, response);
+        callback(null, response);
     } else {
         // Return to CloudFront
-        return callback(null, request);
+        callback(null, request);
     }
 };

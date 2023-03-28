@@ -22,5 +22,5 @@ exports.handler = (event, context, callback) => {
     request.uri = newuri;
 
     // Return to CloudFront
-    return callback(null, request);
+    callback(null, request);
 };
