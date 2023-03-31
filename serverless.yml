@@ -1,6 +1,6 @@
 # See limits on Lambda@Edge http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-lambda-at-edge
 
-service: ${ssm:/${opt:client}/${opt:stage}/SERVICE_NAME_EDGE_LAMBDAS}
+service: edge-lambdas
 
 provider:
   name: aws
@@ -10,12 +10,17 @@ provider:
   memorySize: 128
   timeout: 10
   stage: ${opt:stage}
-  deploymentBucket: ${ssm:/${opt:client}/${opt:stage}/DEPLOYMENT_BUCKET}
+  deploymentBucket:
+    name: ${env:DEPLOYMENT_BUCKET}
 
 functions:
   subdirIndex:
     handler: src/origin_request/subdir-index.handler
     name: ${self:service}-indexhtml-${opt:stage}
+
+  base64Redirect:
+    handler: src/origin_request/base64-redirect.handler
+    name: ${self:service}-base64-redirect-${opt:stage}
 
   headers:
     handler: src/origin_response/sec-headers.handler
