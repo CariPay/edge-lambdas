@@ -12,3 +12,13 @@ script:
 env:
   global:
     AWS_ACCOUNT_ID: 500307732655
+notifications:
+  slack:
+    secure: gs1gaFPF0gxvJiGk5wfEWl5SdO2LxUEC80pZhn2khXwdhbgj/S9pj/Fky0WHpMJ9uZeel1HNLorWfHSJranjLmjgrG/pNdI7I6M7Fkl7ORnz4UIBlT4YrekO1pHBjGiU/cONaYYshU63NesHA6JyvyNnY6LHaG5R0iCyneLQzhYnmf81/9PLXkKhsgpSbc7pi0k5gh0H14FxWc68p6FDNbdtVYx2+qKs+lUBb5Az8a/8fr7/5o8w2nrfs2REb/Qh2lCdKB1VNWB798P1yeKBiZHbbBATAHZQuG9ASQJmnv7q5yrzvyz0rbqPhwaBxM1OWZ503gDk5QM1Vy474j/L1lxlbIhYT595y5q9MVBchwA+SJmIk5Pmg+yyDY9ee/T6PRC6CWsP3ML5/cboTlP37qI/P3wMqEMqve7cN8WNzH1yt2sHd8Gm7+65vwVusWsXoY4nbZdChbOsrdxTinkhLpmmTLD++fVWSctcgvaM8rYdcnYqvk4tWL4zi9w53ZsN6EgVlu6DsQ3ilHCHpQmgfi6DgS3xYu6JCwcYlOqPIVIi6XFLO+LmQo32pkzcrek7lIuiNdYHFBTfzf4zNkzCkn9PAyEhyZHh09j/qwYZEpmO+v+90cLERX+/DNG7Pe9ovWPhTnMddlkUfteYC/fElUg7WhBuWyX/zD959FKgy60=
+    on_succes: change
+    on_failure: always
+    on_pull_requests: true
+    template:
+      - "Built (<%{compare_url}|%{commit}>) on %{repository_name}@%{branch} by %{author} - %{result}"
+      - "Subject: %{commit_subject}"
+      - "Build details: %{build_url}"
