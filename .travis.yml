@@ -2,19 +2,16 @@ sudo: required
 language: node_js
 node_js:
 - 16
-
 before_script:
-  - deploy/setup.sh
-
+- deploy/setup.sh
 script:
-  - deploy/deploy.sh # serverless
-
+- deploy/deploy.sh
 env:
   global:
     AWS_ACCOUNT_ID: 500307732655
 notifications:
   slack:
-    secure: gs1gaFPF0gxvJiGk5wfEWl5SdO2LxUEC80pZhn2khXwdhbgj/S9pj/Fky0WHpMJ9uZeel1HNLorWfHSJranjLmjgrG/pNdI7I6M7Fkl7ORnz4UIBlT4YrekO1pHBjGiU/cONaYYshU63NesHA6JyvyNnY6LHaG5R0iCyneLQzhYnmf81/9PLXkKhsgpSbc7pi0k5gh0H14FxWc68p6FDNbdtVYx2+qKs+lUBb5Az8a/8fr7/5o8w2nrfs2REb/Qh2lCdKB1VNWB798P1yeKBiZHbbBATAHZQuG9ASQJmnv7q5yrzvyz0rbqPhwaBxM1OWZ503gDk5QM1Vy474j/L1lxlbIhYT595y5q9MVBchwA+SJmIk5Pmg+yyDY9ee/T6PRC6CWsP3ML5/cboTlP37qI/P3wMqEMqve7cN8WNzH1yt2sHd8Gm7+65vwVusWsXoY4nbZdChbOsrdxTinkhLpmmTLD++fVWSctcgvaM8rYdcnYqvk4tWL4zi9w53ZsN6EgVlu6DsQ3ilHCHpQmgfi6DgS3xYu6JCwcYlOqPIVIi6XFLO+LmQo32pkzcrek7lIuiNdYHFBTfzf4zNkzCkn9PAyEhyZHh09j/qwYZEpmO+v+90cLERX+/DNG7Pe9ovWPhTnMddlkUfteYC/fElUg7WhBuWyX/zD959FKgy60=
+    secure: lAW7pYqr/pL1L+3QtzuZwk05XddbJwU7cUR7v+Vi24kOJ3YQ+UTDqRZjsmXxCvhL99maj7iWF3RXVGPYgHPEmadY9ycLr2GovfQiKor0mLilUvw+NjPLDpcVulyL6dMFDmXL1OTQIQg9mvzlmlk1gnIs4hbhp4s7CkVcy9CitjmKf4BiFxfNf7pPnm7gUx4oGbowqRHyw6c7ePLePqiQ0prVjDq2MURJJqbfzloM0USMzDPYiYwswMpwaPvCCc4KhRo/x0/G795hzt0dxix8qTB6nLzp1o1WUHlwG2sUvB915DBjBEFNpvcZ93vAjcetBewlbhf3+7r8TqN5nv+pMKYId6qn5yLhBl7IZleDucTLjYpoAm4aA7jI6C5zy9pqFrRuohkhytW9omJzAPPzYPNKn99a6lQ5Bb1wnuLi+8O+NGa0NJYMzdHvmiZPcizetQIf4jQ7DKcS7oYLL2sN32LOxD3/qtl7UCqPbrlvySRI+67hcc+oy83NJCI0mSjg7my2te2Yw622BTDpRVEd9gV5BXs1r5RCA57lBumhT6AP69oCdIWBL6/8ijb+d0n1y3h2MNNwbWl4Yk3l1QOID0ax7K8XmmCpGxrtkhxoYkhJWX4vDJRSB/030uKNsvYblPtE60LcSDLU0RSOKWP1PPebpB8C0hNBLAJWIWqvd6U=
     on_succes: change
     on_failure: always
     on_pull_requests: true
