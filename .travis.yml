@@ -11,11 +11,13 @@ env:
     AWS_ACCOUNT_ID: 500307732655
 notifications:
   slack:
-    secure: lAW7pYqr/pL1L+3QtzuZwk05XddbJwU7cUR7v+Vi24kOJ3YQ+UTDqRZjsmXxCvhL99maj7iWF3RXVGPYgHPEmadY9ycLr2GovfQiKor0mLilUvw+NjPLDpcVulyL6dMFDmXL1OTQIQg9mvzlmlk1gnIs4hbhp4s7CkVcy9CitjmKf4BiFxfNf7pPnm7gUx4oGbowqRHyw6c7ePLePqiQ0prVjDq2MURJJqbfzloM0USMzDPYiYwswMpwaPvCCc4KhRo/x0/G795hzt0dxix8qTB6nLzp1o1WUHlwG2sUvB915DBjBEFNpvcZ93vAjcetBewlbhf3+7r8TqN5nv+pMKYId6qn5yLhBl7IZleDucTLjYpoAm4aA7jI6C5zy9pqFrRuohkhytW9omJzAPPzYPNKn99a6lQ5Bb1wnuLi+8O+NGa0NJYMzdHvmiZPcizetQIf4jQ7DKcS7oYLL2sN32LOxD3/qtl7UCqPbrlvySRI+67hcc+oy83NJCI0mSjg7my2te2Yw622BTDpRVEd9gV5BXs1r5RCA57lBumhT6AP69oCdIWBL6/8ijb+d0n1y3h2MNNwbWl4Yk3l1QOID0ax7K8XmmCpGxrtkhxoYkhJWX4vDJRSB/030uKNsvYblPtE60LcSDLU0RSOKWP1PPebpB8C0hNBLAJWIWqvd6U=
-    on_succes: change
+    rooms:
+      secure: LoolZpjoss6YG09mla5ps6TdpkMVb/ioCPB+4R/antrjfEIybgw2nM7qOjQFhLMI7DXTCDvTeKHp6a4CAmavL63sxUjqzANqVnRbomsWuFH3WbkbNv/tWbBIiB/0h/MIFFv8goxO4tXQddLcjTvtt/kdE3K3SMenfIlhiCVdG80nWcnBMRPXijfXOHL8ZY6Mh5KOPCw1i5q+r3GDBrXsKeYZViTWADyHxD+rkouedIZRFJWOF5LpwNLp258unhYbODFVsQ933nFfKk7Eusm5MH5Tb7RWlvl3TxFRnc6PunBAQrMX4RaoRgO/u6cr/P5EkFFkVx0h7aW16P/8h8LlY11eX3YbOMQT2ENsTNr7UvdNCQobqEFMbqlti47fD4u0fKfHf72sa/HcPlRmihCMlzpAzzCbgv0FkDfx4N6mkknXwZsi+iGOmObhwzOiI+Vzt5e+VWOcAdJTfbdBqn37lw+bMX1xIEyWTBtlDyFFz4mf5jNUHraNnA/HNzzajDUJH2NOJnCbHO1tN8TYiGtxjFGrzOXpEDGci/U8VmY9UMV1ZvkaCga3ph/KUoZfKqEUp6UH6cCCLRhePC42vwuZQVlg+3sBFLuvNkp12LxLifchOEejCfehC8kPm8LS+WWh7QGRWwgJGlgISIbKzU7itfYLeHXRUn8PLdYU8OGe6Fg=
+    on_succes: always
     on_failure: always
     on_pull_requests: true
     template:
-      - "Built (<%{compare_url}|%{commit}>) on %{repository_name}@%{branch} by %{author} - %{result}"
-      - "Subject: %{commit_subject}"
-      - "Build details: %{build_url}"
+      - "Repo: %{repository_name}"
+      - "PR: #<%{pull_request_url}|%{pull_request_number}>"
+      - "Branch: <%{compare_url}|%{branch}>"
+      - "Build: #%{build_number} - <%{build_url}|%{result}>"
