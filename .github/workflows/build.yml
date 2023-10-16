@@ -3,6 +3,7 @@ name: Node.js CI
 on: [push, pull_request]
 
 env:
+  AWS_REGION: ${{ secrets.DEFAULT_REGION }}
   AWS_ACCESS_KEY_DEV: ${{ secrets.AWS_ACCESS_KEY_DEV }}
   AWS_SECRET_ACCESS_KEY_DEV: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
   AWS_ACCESS_KEY_PROD: ${{ secrets.AWS_ACCESS_KEY_PROD }}
