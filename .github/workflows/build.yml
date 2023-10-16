@@ -8,12 +8,40 @@ env:
   AWS_SECRET_ACCESS_KEY_DEV: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
   AWS_ACCESS_KEY_PROD: ${{ secrets.AWS_ACCESS_KEY_PROD }}
   AWS_SECRET_ACCESS_KEY_PROD: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN}}
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Send job started to Slack
+        if: ${{ always() }}
+        id: slack_before
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          channel-id: ${{ vars.SLACK_REPORTING_CHANNEL_ID }}
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "username": Github Actions Reporter,
+              "icon_url": ${{ vars.SLACK_REPORTER_LOGO_URL }},
+              "attachments": [
+                {
+                  "color": "#ef9f0e",
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "Repo: <https://github.com/${{ github.repository }}|${{ github.repository }}>\nPR: ${{ github.event.pull_request.html_url || '#' }}\nBranch: ${{ github.event.compare }}\nRun: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.job }}|#${{ github.run_number }}> - started\nAuthor: @${{ github.triggering_actor}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -34,4 +62,30 @@ jobs:
       - name: Deployment finished
         run: echo 'deployed'
 
-  # You can add more jobs or steps as needed.
+      - name: Send job result to Slack
+        if: ${{ always() }}
+        id: slack_after
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          channel-id: ${{ vars.SLACK_REPORTING_CHANNEL_ID }}
+          update-ts: ${{ steps.slack_before.outputs.ts }}
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "username": Github Actions Reporter,
+              "icon_url": ${{ vars.SLACK_REPORTER_LOGO_URL }},
+              "attachments": [
+                {
+                  "color": "${{ job.status == 'cancelled' && '#b1b1b1' || job.status == 'success' && '#97c530' || '#c5304c' }}",
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "Repo: <https://github.com/${{ github.repository }}|${{ github.repository }}>\nPR: ${{ github.event.pull_request.html_url || '#' }}\nBranch: ${{ github.event.compare }}\nRun: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.job }}|#${{ github.run_number }}> - ${{ job.status }}\nAuthor: @${{ github.triggering_actor}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
