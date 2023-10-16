@@ -1,20 +1,20 @@
 #!/bin/bash
 
-if [[ $TRAVIS_BRANCH =~ develop|feature ]]; then
-  echo 'Deploying to dev: ' $TRAVIS_BRANCH
+if [[ $GITHUB_REF_NAME =~ develop|feature ]]; then
+  echo 'Deploying to dev: ' $GITHUB_REF_NAME
   STAGE=dev
-elif [[ $TRAVIS_BRANCH =~ bug|release ]]; then
-  echo 'Deploying to qa: ' $TRAVIS_BRANCH
+elif [[ $GITHUB_REF_NAME =~ bug|release ]]; then
+  echo 'Deploying to qa: ' $GITHUB_REF_NAME
   STAGE=qa
-elif [[ $TRAVIS_BRANCH =~ master ]]; then
-  echo 'Deploying to prod: ' $TRAVIS_BRANCH
+elif [[ $GITHUB_REF_NAME =~ master ]]; then
+  echo 'Deploying to prod: ' $GITHUB_REF_NAME
   STAGE=prod
 else
-  echo 'Deploying to dev, no matching branch found: ' $TRAVIS_BRANCH
+  echo 'Deploying to dev, no matching branch found: ' $GITHUB_REF_NAME
   STAGE=dev
 fi
 
-COMPANY_INITIALS=$(deploy/get_company.sh $TRAVIS_BRANCH)
+COMPANY_INITIALS=$(deploy/get_company.sh $GITHUB_REF_NAME)
 REGION="${AWS_REGION:=us-east-1}"
 
 npm install
