@@ -25,9 +25,6 @@ jobs:
       - name: Run before script
         run: deploy/setup.sh
 
-      - name: Set ENV values
-        run: deploy/setup_env.sh
-
       - name: Run deploy script
         run: deploy/deploy.sh
 
