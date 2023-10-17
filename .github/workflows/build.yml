@@ -8,12 +8,16 @@ env:
   AWS_SECRET_ACCESS_KEY_DEV: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
   AWS_ACCESS_KEY_PROD: ${{ secrets.AWS_ACCESS_KEY_PROD }}
   AWS_SECRET_ACCESS_KEY_PROD: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+  DEPLOYMENT_BUCKET: ${{ vars.DEPLOYMENT_BUCKET }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set Branch Name
+        run: echo "BRANCH_NAME=${{ github.event.pull_request && github.event.pull_request.base.ref || github.ref_name }}" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v4
 
